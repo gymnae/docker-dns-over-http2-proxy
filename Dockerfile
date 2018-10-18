@@ -9,8 +9,6 @@ RUN set -e;                                                                     
     rm -rf /tmp/go
 
 COPY doh-server.conf /doh-server.conf
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 443 4343 80
+COPY nginx.conf /etc/nginx/nginx.conf
 
 ENTRYPOINT ["/dns-over-https-proxy"]
