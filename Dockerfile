@@ -7,7 +7,7 @@ RUN set -e; \
     GOPATH=/tmp/go GOBIN=/ go get -v -ldflags '-s' github.com/m13253/dns-over-https/doh-server; \
     rm -rf /tmp/go
 
-RUN apk del git go@community gcc musl-dev
+#RUN apk del git go@community gcc musl-dev
 
 COPY doh-server.conf /doh-server.conf
 COPY nginx.conf /etc/nginx/nginx.conf
