@@ -11,4 +11,8 @@ RUN set -e;                                                                     
 COPY doh-server.conf /doh-server.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 
-ENTRYPOINT ["/dns-over-https-proxy"]
+# prepare init script for start
+ADD docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
+CMD ["/docker-entrypoint.sh]
