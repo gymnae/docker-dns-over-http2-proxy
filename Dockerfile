@@ -1,5 +1,5 @@
 
-FROM gymnae/webserverbase:master
+FROM gymnae/webserverbase
 MAINTAINER Gunnar Falk <docker@grundstil.de>
 
 RUN set -e;                                                                                   \
