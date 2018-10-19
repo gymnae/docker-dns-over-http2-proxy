@@ -7,8 +7,12 @@ RUN set -e; \
     GOPATH=/tmp/go GOBIN=/ go get -v -ldflags '-s' github.com/m13253/dns-over-https/doh-server; \
     rm -rf /tmp/go
 
+RUN rm -rf /var/cache/apk/* && \
+    rm -rf /tmp/*
+RUN apk update
+
 #RUN apk del git go@community gcc musl-dev
-RUN apk del php7-openssl@community \
+RUN apk del --no-cache php7-openssl@community \
 	php7-curl@community \
 	php7-fpm@community \
 	php7-gd@community \
