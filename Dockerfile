@@ -8,6 +8,16 @@ RUN set -e; \
     rm -rf /tmp/go
 
 #RUN apk del git go@community gcc musl-dev
+RUN apk del php7-openssl@community \
+	php7-curl@community \
+	php7-fpm@community \
+	php7-gd@community \
+	php7-redis@community \
+	php7-pdo_mysql@community \
+	php7-pgsql@community \
+	libmaxminddb \
+    php7-fpm@community \
+	php7-sqlite3@community 
 
 COPY doh-server.conf /doh-server.conf
 COPY nginx.conf /etc/nginx/nginx.conf
@@ -16,4 +26,4 @@ COPY nginx.conf /etc/nginx/nginx.conf
 ADD docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
-CMD ["sh ./docker-entrypoint.sh"]
+ENTRYPOINT ["sh ./docker-entrypoint.sh"]
