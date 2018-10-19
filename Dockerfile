@@ -2,26 +2,27 @@
 FROM gymnae/webserverbase
 MAINTAINER Gunnar Falk <docker@grundstil.de>
 
+# install what we actually need
 RUN set -e; \
     apk add --no-cache ca-certificates git go@community gcc musl-dev; \
     GOPATH=/tmp/go GOBIN=/ go get -v -ldflags '-s' github.com/m13253/dns-over-https/doh-server; \
     rm -rf /tmp/go
 
+# remove clutter from the origin 
 RUN rm -rf /var/cache/apk/* && \
-    rm -rf /tmp/*
-RUN apk update
-
-#RUN apk del git go@community gcc musl-dev
-RUN apk del --no-cache php7-openssl@community \
-	php7-curl@community \
-	php7-fpm@community \
-	php7-gd@community \
-	php7-redis@community \
-	php7-pdo_mysql@community \
-	php7-pgsql@community \
-	libmaxminddb \
-    php7-fpm@community \
-	php7-sqlite3@community 
+    rm -rf /tmp/* \
+    && apk update \
+    && apk del git gcc musl-dev \
+    php7-openssl \
+	php7-curl \
+	php7-fpm \
+	php7-gd \
+	php7-redis \
+	php7-pdo_mysql \
+	php7-pgsql \
+    libmaxminddb \
+    php7-fpm \
+	php7-sqlite3
 
 COPY doh-server.conf /doh-server.conf
 COPY nginx.conf /etc/nginx/nginx.conf
@@ -30,4 +31,4 @@ COPY nginx.conf /etc/nginx/nginx.conf
 ADD docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
-ENTRYPOINT ["sh ./docker-entrypoint.sh"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
