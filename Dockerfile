@@ -4,7 +4,7 @@ MAINTAINER Gunnar Falk <docker@grundstil.de>
 
 # install what we actually need
 RUN set -e; \
-    apk add --no-cache ca-certificates git go@community gcc musl-dev; \
+    apk add --no-cache ca-certificates git go gcc musl-dev; \
     GOPATH=/tmp/go GOBIN=/ go get -v -ldflags '-s' github.com/m13253/dns-over-https/doh-server; \
     rm -rf /tmp/go
 
