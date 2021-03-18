@@ -31,4 +31,6 @@ COPY nginx.conf /etc/nginx/nginx.conf
 ADD docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
+EXPOSE 8053
+
 ENTRYPOINT ["./docker-entrypoint.sh"]
